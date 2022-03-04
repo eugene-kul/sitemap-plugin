@@ -29,7 +29,6 @@ class Sitemap {
                     }
                 }
             } else {$this->addItemToSet(Item::asCmsPage($page));}
-
         }
 
         return $this->make();
