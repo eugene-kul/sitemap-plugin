@@ -15,12 +15,8 @@ class Plugin extends PluginBase {
                 if (!($theme = Theme::getEditTheme()))
                     throw new ApplicationException(Lang::get('cms::lang.theme.edit.not_found'));
 
-                if (PluginManager::instance()->hasPlugin('RainLab.Pages')
-                    && $widget->model instanceof \RainLab\Pages\Classes\Page) {
-
-                    $widget->addFields( array_except($this->staticSeoFields(), [
-                        'viewBag[model_class]',
-                    ]), 'primary');
+                if (PluginManager::instance()->hasPlugin('RainLab.Pages') && $widget->model instanceof \RainLab\Pages\Classes\Page) {
+                    $widget->addFields( array_except($this->staticSeoFields(), ['viewBag[model_class]']), 'primary');
                 }
 
                 if (!$widget->model instanceof \Cms\Classes\Page) return;
@@ -51,6 +47,7 @@ class Plugin extends PluginBase {
                 !$user->hasPermission(["eugene3993.sitemap"]) ? [
                     "use_in_sitemap",
                     "model_class",
+                    "changefreq",
                     "priority",
                 ] : [],
             )
