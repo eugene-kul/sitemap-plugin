@@ -1,0 +1,8 @@
+{
+    "name": "eugene3993/sitemap-plugin",
+    "type": "october-plugin",
+    "description": "Plugin for generation Sitemap.xml",
+    "require": {
+        "composer/installers": "~1.0"
+    }
+}
