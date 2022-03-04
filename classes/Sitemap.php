@@ -1,5 +1,6 @@
 <?php namespace Eugene3993\Sitemap\Classes;
 
+use System\Classes\PluginManager;
 use Cms\Classes\Page;
 use Cms\Classes\Theme;
 
@@ -7,13 +8,15 @@ class Sitemap {
 
     private $xml;
     private $urlSet;
+    const MAX_URLS = 50000;
+    protected $urlCount = 0;
 
     function generate() {
 
         $pages = Page::listInTheme(Theme::getEditTheme());
         $models = [];
 
-        foreach( $pages as $page) {
+        foreach($pages as $page) {
             if (!$page->use_in_sitemap ) continue;
 
             $modelClass = str_replace(' ', '', $page['model_class']);
@@ -29,6 +32,14 @@ class Sitemap {
                     }
                 }
             } else {$this->addItemToSet(Item::asCmsPage($page));}
+        }
+
+        if (PluginManager::instance()->hasPlugin('RainLab.Pages')) {
+            $staticPages = \RainLab\Pages\Classes\Page::listInTheme(Theme::getActiveTheme());
+            foreach ($staticPages as $staticPage) {
+                if (! $staticPage->getViewBag()->property('use_in_sitemap')) continue;
+                $this->addItemToSet(Item::asStaticPage($staticPage));
+            }
         }
 
         return $this->make();
@@ -77,6 +88,12 @@ class Sitemap {
     }
 
     protected function makeUrlElement($xml, $pageUrl, $priority, $changefreq) {
+
+        if ($this->urlCount >= self::MAX_URLS) {
+            return false;
+        }
+
+        $this->urlCount++;
 
         $url = $xml->createElement('url');
         $pageUrl && $url->appendChild($xml->createElement('loc', $pageUrl));
@@ -133,6 +150,14 @@ class Item {
             );
         }
         return new Self($page->url, $page->priority, $page->changefreq);
+    }
+
+    public static function asStaticPage($staticPage) {
+        return new self(
+            url($staticPage->url),
+            $staticPage->priority,
+            $staticPage->changefreq
+        );
     }
 }
 
