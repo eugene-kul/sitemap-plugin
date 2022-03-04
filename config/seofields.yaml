@@ -1,6 +1,6 @@
 use_in_sitemap:
   label: eugene3993.sitemap::lang.config.use_in_sitemap
-  default: true
+  default: false
   type: switch
   tab: Sitemap
   span: auto
