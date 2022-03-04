@@ -2,6 +2,8 @@
 
 > The plugin does not need additional settings, it functions immediately after installation
 
+It supports CMS Pages, Static Pages, Blog posts and Builder's pages list.
+
 Functionality:
 
 - file generation sitemap.xml
