@@ -19,12 +19,26 @@ class Plugin extends PluginBase {
                     $widget->addFields( array_except($this->staticSeoFields(), ['viewBag[model_class]']), 'primary');
                 }
 
+                if (PluginManager::instance()->hasPlugin('RainLab.Blog') && $widget->model instanceof \RainLab\Blog\Models\Post) {
+                    $widget->addFields(array_except($this->blogSeoFields(), [
+                        'metadata[model_class]',
+                        'metadata[changefreq]',
+                        'metadata[priority]',
+                    ]), 'secondary');
+                }
+
                 if (!$widget->model instanceof \Cms\Classes\Page) return;
 
                 $widget->addFields($this->cmsSeoFields(), 'primary');
             }
 
         });
+    }
+
+    private function blogSeoFields() {
+        return collect($this->seoFields())->mapWithKeys(function($item, $key) {
+            return ["metadata[$key]" => $item];
+        })->toArray();
     }
 
     private function staticSeoFields() {

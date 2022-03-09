@@ -2,9 +2,9 @@ plugin:
     name: 'eugene3993.sitemap::lang.plugin.name'
     description: 'eugene3993.sitemap::lang.plugin.description'
     author: Eugene3993
-    icon: oc-icon-sitemap
+    icon: icon-sitemap
     homepage: ''
 permissions:
     eugene3993.sitemap:
-        tab: 'Sitemap plugin by Eugene3993'
+        tab: 'Sitemap'
         label: 'eugene3993.sitemap::lang.permissions.labels.sitemap'
