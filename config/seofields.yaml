@@ -1,12 +1,12 @@
 use_in_sitemap:
-  label: eugene3993.seo::lang.config.use_in_sitemap
+  label: eugene3993.sitemap::lang.config.use_in_sitemap
   default: false
   type: switch
   tab: Sitemap
   span: full
 
 changefreq:
-  label: eugene3993.seo::lang.config.changefreq
+  label: eugene3993.sitemap::lang.config.changefreq
   type: dropdown
   tab: Sitemap
   span: auto
@@ -20,14 +20,14 @@ changefreq:
     never: 'never'
 
 model_class:
-  label: eugene3993.seo::lang.config.model_class.label
-  comment: eugene3993.seo::lang.config.model_class.comment
+  label: eugene3993.sitemap::lang.config.model_class.label
+  comment: eugene3993.sitemap::lang.config.model_class.comment
   tab: Sitemap
   type: text
   span: auto
 
 priority:
-  label: eugene3993.seo::lang.config.priority
+  label: eugene3993.sitemap::lang.config.priority
   type: dropdown
   tab: Sitemap
   span: auto
