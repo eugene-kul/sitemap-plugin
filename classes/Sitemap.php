@@ -129,7 +129,7 @@ class Item {
     public $loc, $lastModified, $priority, $changefreq;
 
     function __construct($url=null, $lastModified=null, $priority=null, $changefreq=null) {
-        $this->loc = Self::replaceUrl($url);
+        $this->loc = self::replaceUrl($url);
         $this->lastModified = $lastModified;
         $this->priority = $priority;
         $this->changefreq = $changefreq;
@@ -158,33 +158,33 @@ class Item {
 
     public static function asCmsPage($page, $model = null) {
         if ($model) {
-            return new Self(
-                url(Self::replaceUrl($page->url, $model)),
-                $model->updated_at ? $model->updated_at->format('c') : \Carbon\Carbon::createFromTimestamp($page->mtime)->format('c'),
+            return new self(
+                url(self::replaceUrl($page->url, $model)),
+                $model->updated_at ? $model->updated_at->format('c') : Carbon::createFromTimestamp($page->mtime)->format('c'),
                 $page->priority,
                 $page->changefreq
             );
         }
-        return new Self(
+        return new self(
             $page->url,
-            \Carbon\Carbon::createFromTimestamp($page->mtime)->format('c'),
+            Carbon::createFromTimestamp($page->mtime)->format('c'),
             $page->priority,
             $page->changefreq
         );
     }
 
     public static function asStaticPage($staticPage) {
-        return new Self(
+        return new self(
             url($staticPage->url),
-            \Carbon\Carbon::createFromTimestamp($staticPage->mtime)->format('c'),
+            Carbon::createFromTimestamp($staticPage->mtime)->format('c'),
             $staticPage->priority,
             $staticPage->changefreq
         );
     }
 
     public static function asPost($page, $post) {
-        return new Self(
-            url(Self::replaceUrl($page->url, $post)),
+        return new self(
+            url(self::replaceUrl($page->url, $post)),
             $post->updated_at->format('c'),
             $page->priority,
             $page->changefreq
