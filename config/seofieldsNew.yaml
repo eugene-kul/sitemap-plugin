@@ -4,14 +4,13 @@ use_in_sitemap:
   default: false
   type: checkbox
   tab: Sitemap
-  span: full
 
 priority:
   property: priority
   title: eugene3993.sitemap::lang.config.priority
   type: dropdown
   tab: Sitemap
-  span: auto
+  default: 1.0
   options:
     1.0: '1.0'
     0.9: '0.9'
@@ -30,14 +29,13 @@ model_class:
   description: eugene3993.sitemap::lang.config.model_class.comment
   tab: Sitemap
   type: text
-  span: auto
 
 changefreq:
   property: changefreq
   title: eugene3993.sitemap::lang.config.changefreq
   type: dropdown
   tab: Sitemap
-  span: auto
+  default: weekly
   options:
     always: 'always'
     hourly: 'hourly'
